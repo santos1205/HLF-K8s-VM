@@ -19,7 +19,7 @@ spec:
       containers:
       - name: spacex-peer
         # image used
-        image: acloudfan/k8s-hlf-spacex-peer:2.0
+        image: mario3367/k8s-hlf-spacex-peer:2.0
         # Uncomment the following during development/testing of the image
         # imagePullPolicy: Always
         env:
