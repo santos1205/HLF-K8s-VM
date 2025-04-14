@@ -2,24 +2,24 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: budget-peer
+  name: spacex-peer
   labels:
-    app: budget-peer
+    app: spacex-peer
 spec:
-  serviceName: budget-peer
+  serviceName: spacex-peer
   replicas: 1
   selector:
     matchLabels:
-      app: budget-peer
+      app: spacex-peer
   template:
     metadata:
       labels:
-        app: budget-peer
+        app: spacex-peer
     spec:
       containers:
-      - name: budget-peer
+      - name: spacex-peer
         # image used
-        image: acloudfan/k8s-hlf-budget-peer:2.0
+        image: acloudfan/k8s-hlf-spacex-peer:2.0
         # Uncomment the following during development/testing of the image
         # imagePullPolicy: Always
         env:
@@ -30,12 +30,12 @@ spec:
           - name: ORDERER_ADDRESS
             value: acme-orderer-clusterip:30750
           - name: ORG_CONTEXT
-            value: budget
+            value: spacex
           - name: CORE_PEER_ADDRESS
-          # value: budget-peer-clusterip:30851
-            value: localhost:30851
+          # value: spacex-peer-clusterip:30851
+            value: localhost:30951
         volumeMounts:
-        - name: budget-peer-ledger
+        - name: spacex-peer-ledger
           mountPath: /var/ledger
         - name: dockersock
           mountPath: /var/run/docker.sock
@@ -45,7 +45,7 @@ spec:
           path: /var/run/docker.sock
   volumeClaimTemplates:
   - metadata: 
-      name: budget-peer-ledger
+      name: spacex-peer-ledger
     spec:
       accessModes: [ "ReadWriteOnce" ]
       storageClassName: general
@@ -60,19 +60,19 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: budget-peer-clusterip
+  name: spacex-peer-clusterip
 
 spec:
   # This defines which pods are going to be represented by this Service
   # The service becomes a network endpoint for either other services
   # or maybe external users to connect to (eg browser)
   selector:
-    app: budget-peer
+    app: spacex-peer
 
   ports:
-    - name: budget-peer-clusterip
-      port: 30851
-    # - name: budget-peer-cc-clusterip
+    - name: spacex-peer-clusterip
+      port: 30951
+    # - name: spacex-peer-cc-clusterip
     #   port: 30852
 
   type: ClusterIP
@@ -85,21 +85,21 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: budget-peer-nodeport
+  name: spacex-peer-nodeport
 
 spec:
   # This defines which pods are going to be represented by this Service
   # The service becomes a network endpoint for either other services
   # or maybe external users to connect to (eg browser)
   selector:
-    app: budget-peer
+    app: spacex-peer
 
   ports:
-    - name: budget-peer-nodeport-851
-      port: 30851
-      nodePort: 30851
-    - name: budget-peer-cc-nodeport-852
-      port: 30852
-      nodePort: 30852
+    - name: spacex-peer-nodeport-951
+      port: 30951
+      nodePort: 30951
+    - name: spacex-peer-cc-nodeport-952
+      port: 30952
+      nodePort: 30952
 
   type: NodePort
