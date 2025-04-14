@@ -43,5 +43,12 @@ PeerOrgs:
     Users:
       Count: 1
 
-
-      
+  # Peer configuration for Spacex
+  - Name: Spacex
+    Domain: spacex.com
+    EnableNodeOUs: true
+    Specs:
+      - Hostname: peer1.spacex.com
+        CommonName: peer1.spacex.com
+    Users:
+      Count: 1
