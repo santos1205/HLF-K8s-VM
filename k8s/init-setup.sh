@@ -29,4 +29,8 @@ configtxgen -outputAnchorPeersUpdate ./acme-peer-update.tx   -asOrg $ORG_NAME -c
 ORG_NAME=Budget
 configtxgen -outputAnchorPeersUpdate ./budget-peer-update.tx   -asOrg $ORG_NAME -channelID airlinechannel  -profile AirlineChannel
 
+#7. Generate the anchor peer update spacex
+ORG_NAME=Spacex
+configtxgen -outputAnchorPeersUpdate ./spacex-peer-update.tx   -asOrg $ORG_NAME -channelID airlinechannel  -profile AirlineChannel
+
 echo "Done."
